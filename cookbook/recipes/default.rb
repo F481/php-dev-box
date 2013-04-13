@@ -31,12 +31,17 @@ end
 curl
 vim
 git
+nginx
 libapache2-mod-php5
 php5-cli
 php5-curl
+php5-mysql
 php5-sqlite
 php5-intl
+php5-xdebug
+php5-fpm
 php-apc
+mysql-server
 ).each { | pkg | package pkg }
 
 
