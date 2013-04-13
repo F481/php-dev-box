@@ -82,17 +82,7 @@ execute "check if date.timezone is Europe/Berlin in /etc/php5/cli/php.ini?" do
   command "sed -i 's/;date.timezone =.*/date.timezone = Europe\\/Berlin/g' /etc/php5/cli/php.ini"
 end
 
-bash "Running composer install and preparing the phpcr repository" do
-  not_if "test -e /vagrant/vendor/symfony/symfony/src/Symfony/Bundle/FrameworkBundle/Resources/public"
-  user "vagrant"
-  cwd "/vagrant"
-  code <<-EOH
-set -e
-ln -sf /var/tmp/vendor
-curl -s https://getcomposer.org/installer | php
-COMPOSER_VENDOR_DIR="/var/tmp/vendor" php composer.phar install
-app/console doctrine:phpcr:workspace:create sandbox
-app/console doctrine:phpcr:register-system-node-types
-app/console -v doctrine:phpcr:fixtures:load
-EOH
+execute "install composer" do
+  user "root"
+  command "curl -s http://getcomposer.org/installer | php -- --install-dir=/usr/bin"
 end
