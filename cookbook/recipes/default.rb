@@ -32,7 +32,6 @@ curl
 vim
 git
 nginx
-libapache2-mod-php5
 php5-cli
 php5-curl
 php5-mysql
@@ -44,11 +43,6 @@ php-apc
 mysql-server
 ).each { | pkg | package pkg }
 
-
-execute "disable apache2 start on system boot" do
-  user "root"
-  command "update-rc.d -f apache2 remove"
-end
 
 execute "check if short_open_tag is Off in /etc/php5/fpm/php.ini?" do
   user "root"
