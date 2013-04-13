@@ -49,13 +49,6 @@ execute "remove/uninstall apache2 package" do
   command "apt-get remove apache2 -y"
 end
 
-template "/etc/nginx/conf.d/php-fpm.inc" do
-  user "root"
-  mode "0644"
-  source "php-fpm.inc.erb"
-  notifies :reload, "service[nginx]"
-end
-
 service "php5-fpm" do
   action :start
 end
