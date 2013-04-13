@@ -55,26 +55,6 @@ service "apache2" do
   action [ :enable, :start ]
 end
 
-directory "/opt/jackrabbit" do
-  owner "root"
-  group "root"
-end
-
-remote_file "/opt/jackrabbit/jackrabbit.jar" do
-  source "http://archive.apache.org/dist/jackrabbit/2.4.3/jackrabbit-standalone-2.4.3.jar"
-  mode "0644"
-  checksum "e65d2677a9514cf9f8cd216d6a331c2253fd37a2e8daab9a6ca928d602aa83b7"
-end
-
-template "/etc/init.d/jackrabbit" do
-  mode "0755"
-  source "jackrabbit.erb"
-end
-
-service "jackrabbit" do
-  action :start
-end
-
 { "/vagrant/app/config/parameters.yml.dist" => "/vagrant/app/config/parameters.yml",
   "/vagrant/app/config/phpcr_jackrabbit.yml.dist" => "/vagrant/app/config/phpcr.yml" }.each do | src, dest |
   file dest do
@@ -115,8 +95,6 @@ set -e
 ln -sf /var/tmp/vendor
 curl -s https://getcomposer.org/installer | php
 COMPOSER_VENDOR_DIR="/var/tmp/vendor" php composer.phar install
-echo "Waiting for Jackrabbit:"
-while [[ -z `curl -s "http://localhost:8080"` ]] ; do sleep 1s; echo -n "."; done
 app/console doctrine:phpcr:workspace:create sandbox
 app/console doctrine:phpcr:register-system-node-types
 app/console -v doctrine:phpcr:fixtures:load
