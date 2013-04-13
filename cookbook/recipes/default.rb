@@ -44,6 +44,14 @@ mysql-server
 ).each { | pkg | package pkg }
 
 
+service "nginx" do
+  action :start
+end
+
+service "php5-fpm" do
+  action :start
+end 
+
 execute "remove/uninstall apache2 package" do
   user "root"
   command "apt-get remove apache2 -y"
