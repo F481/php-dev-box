@@ -46,7 +46,7 @@ mysql-server
 
 execute "remove/uninstall apache2 package" do
   user "root"
-  command "apt-get remove apache2"
+  command "apt-get remove apache2 -y"
 end
 
 execute "check if short_open_tag is Off in /etc/php5/fpm/php.ini?" do
