@@ -52,12 +52,6 @@ service "apache2" do
   action [ :enable, :start ]
 end
 
-{ "/vagrant/app/config/parameters.yml.dist" => "/vagrant/app/config/parameters.yml" }.each do | src, dest |
-  file dest do
-    content IO.read(src)
-  end
-end
-
 execute "check if short_open_tag is Off in /etc/php5/apache2/php.ini?" do
   user "root"
   not_if "grep 'short_open_tag = Off' /etc/php5/apache2/php.ini"
