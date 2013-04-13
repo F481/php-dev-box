@@ -57,6 +57,21 @@ execute "remove/uninstall apache2 package" do
   command "apt-get remove apache2 -y"
 end
 
+# config php-fpm for nginx
+template "php-fpm.inc" do
+  path "#{node[:nginx][:dir]}/conf.d/php-fpm.inc"
+  source "php-fpm.config.erb"
+  owner "root"
+  group "root"
+  mode 0644
+  action :create
+  only_if "dpkg --get-selections | grep php5-fpm"
+end
+
+service "php5-fpm" do
+  action :start
+end
+
 execute "check if short_open_tag is Off in /etc/php5/fpm/php.ini?" do
   user "root"
   not_if "grep 'short_open_tag = Off' /etc/php5/fpm/php.ini"
