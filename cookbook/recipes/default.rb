@@ -29,33 +29,7 @@ end
 # install the software we need
 %w(
 curl
-vim
-git
-nginx
-php5-cli
-php5-curl
-php5-mysql
-php5-sqlite
-php5-intl
-php5-xdebug
-php5-fpm
-php-apc
-mysql-server
 ).each { | pkg | package pkg }
-
-
-execute "remove/uninstall apache2 package" do
-  user "root"
-  command "apt-get remove apache2 -y"
-end
-
-service "php5-fpm" do
-  action :start
-end
-
-service "nginx" do
-  action :start
-end
 
 execute "check if short_open_tag is Off in /etc/php5/fpm/php.ini?" do
   user "root"
