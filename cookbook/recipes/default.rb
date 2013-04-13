@@ -49,15 +49,11 @@ execute "remove/uninstall apache2 package" do
   command "apt-get remove apache2 -y"
 end
 
-# config php-fpm for nginx
-template "php-fpm.inc" do
-  path "#{node[:nginx][:dir]}/conf.d/php-fpm.inc"
-  source "php-fpm.config.erb"
-  owner "root"
-  group "root"
-  mode 0644
-  action :create
-  only_if "dpkg --get-selections | grep php5-fpm"
+template "/etc/nginx/conf.d/php-fpm.inc" do
+  user "root"
+  mode "0644"
+  source "php-fpm.inc.erb"
+  notifies :reload, "service[nginx]"
 end
 
 service "php5-fpm" do
