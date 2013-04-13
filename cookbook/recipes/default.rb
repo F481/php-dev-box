@@ -28,11 +28,8 @@ end
 
 # install the software we need
 %w(
-openjdk-6-jre-headless
 curl
-tmux
 vim
-emacs23-nox
 git
 libapache2-mod-php5
 php5-cli
