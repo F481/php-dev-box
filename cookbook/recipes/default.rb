@@ -45,6 +45,11 @@ mysql-server
 ).each { | pkg | package pkg }
 
 
+execute "disable apache2 start on system boot" do
+  user "root"
+  command "update-rc.d -f apache2 remove"
+end
+
 execute "check if short_open_tag is Off in /etc/php5/fpm/php.ini?" do
   user "root"
   not_if "grep 'short_open_tag = Off' /etc/php5/fpm/php.ini"
