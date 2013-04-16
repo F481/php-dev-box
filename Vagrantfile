@@ -32,10 +32,5 @@ Vagrant::Config.run do |config|
 
     # chef recipes
     chef.add_recipe("cookbook")
-    chef.add_recipe("cookbook-git")
-    chef.add_recipe("cookbook-mysql")
-    chef.add_recipe("cookbook-nginx")
-    chef.add_recipe("cookbook-php")
-    chef.add_recipe("cookbook-vim")
   end
 end
