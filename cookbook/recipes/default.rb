@@ -28,7 +28,17 @@ end
 
 # install the software we need
 %w(
-curl
+ curl
+ vim
+ git
+ libapache2-mod-php5
+ php5-cli
+ php5-curl
+ php5-mysql
+ php5-intl
+ php5-xdebug
+ php-apc
+ mysql-server
 ).each { | pkg | package pkg }
 
 execute "check if short_open_tag is Off in /etc/php5/fpm/php.ini?" do
