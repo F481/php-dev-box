@@ -41,10 +41,10 @@ end
  mysql-server
 ).each { | pkg | package pkg }
 
-execute "check if short_open_tag is Off in /etc/php5/fpm/php.ini?" do
+execute "check if short_open_tag is Off in /etc/php5/apache2/php.ini?" do
   user "root"
-  not_if "grep 'short_open_tag = Off' /etc/php5/fpm/php.ini"
-  command "sed -i 's/short_open_tag = On/short_open_tag = Off/g' /etc/php5/fpm/php.ini"
+  not_if "grep 'short_open_tag = Off' /etc/php5/apache2/php.ini"
+  command "sed -i 's/short_open_tag = On/short_open_tag = Off/g' /etc/php5/apache2/php.ini"
 end
 
 execute "check if short_open_tag is Off in /etc/php5/cli/php.ini?" do
@@ -53,10 +53,10 @@ execute "check if short_open_tag is Off in /etc/php5/cli/php.ini?" do
   command "sed -i 's/short_open_tag = On/short_open_tag = Off/g' /etc/php5/cli/php.ini"
 end
 
-execute "check if date.timezone is Europe/Berlin in /etc/php5/fpm/php.ini?" do
+execute "check if date.timezone is Europe/Berlin in /etc/php5/apache2/php.ini?" do
   user "root"
-  not_if "grep '^date.timezone = Europe/Berlin' /etc/php5/fpm/php.ini"
-  command "sed -i 's/;date.timezone =.*/date.timezone = Europe\\/Berlin/g' /etc/php5/fpm/php.ini"
+  not_if "grep '^date.timezone = Europe/Berlin' /etc/php5/apache2/php.ini"
+  command "sed -i 's/;date.timezone =.*/date.timezone = Europe\\/Berlin/g' /etc/php5/apache2/php.ini"
 end
 
 execute "check if date.timezone is Europe/Berlin in /etc/php5/cli/php.ini?" do
