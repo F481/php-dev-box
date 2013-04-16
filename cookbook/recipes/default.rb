@@ -38,6 +38,7 @@ end
  php5-intl
  php5-xdebug
  php-apc
+ phpunit
  mysql-server
 ).each { | pkg | package pkg }
 
