@@ -39,13 +39,8 @@ end
  php5-xdebug
  php-apc
  mysql-server
+ phpunit
 ).each { | pkg | package pkg }
-
-execute "install phpunit via apt-get" do
-  user "root"
-  not_if "which phpunit"
-  command "apt-get install --yes phpunit"
-end
 
 execute "check if short_open_tag is Off in /etc/php5/apache2/php.ini?" do
   user "root"
