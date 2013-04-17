@@ -69,19 +69,3 @@ execute "install composer" do
   user "root"
   command "curl -s http://getcomposer.org/installer | php -- --install-dir=/usr/bin"
 end
-
-execute "discover phpunit" do
-  command "pear channel-discover pear.phpunit.de"
-  action :run
-  not_if "which phpunit"
-end
-
-execute "config phpunit" do
-  command "pear config-set auto_discover 1"
-  action :run
-end
-
-execute "install phpunit" do
-  command "pear install pear.phpunit.de/PHPUnit"
-  action :run
-end
